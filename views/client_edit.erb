@@ -1,30 +1,28 @@
-<!-- <% if @stylists.any?() %>
-  <form action="/clients/<%= @client.id %>" method="post">
-    <input type="hidden" name="_method" value="patch">
+<h1>Update <%=@client.name() %> </h1>
 
-    <% @movies.each() do |movie| %>
-      <div class="checkbox">
-        <label>
-          <input type="checkbox" name="movie_ids[]" value="<%= movie.id() %>"><%= movie.name() %>
-        </label>
-      </div>
-    <% end %>
+<form action="/clients/<%= @client.id() %>" method="post">
+  <input name="_method" type="hidden" value="patch">
+  <div class="form-group">
+    <label for="name">Name:</label>
+    <input type = "text" name="name" id="name">
+  <div>
+  <div class="form_group">
+    <label for="phone">Phone:</label>
+    <input type="text" name="phone" id="phone">
+  </div>
+  <div class="form-group">
+    <label for="email">Email:</label>
+    <input type = "text" name="email" id="email">
+  <div>
 
-    <button type="submit">Add movies</button>
-  </form>
-<% end %> -->
-<!--
-<% if @stylists.any?() %>
-  <form action="/movies/<%= @movie.id %>" method="post">
-  <input type="hidden" name="_method" value="patch">
-  <% @stylists.each() do |stylist| %>
-    <div class="checkbox">
-      <label>
-        <input type="checkbox" name="stylist_ids[]" value="<%= stylist.id() %>"><%= stylist.name() %>
-      </label>
-    </div>
-  <% end %>
+  <br><button type="submit">Update</button><br>
+</form>
+<br>
 
-  <button type="submit">Add stylist</button>
-  </form>
-<% end %> -->
+<form action="/clients/<%= @client.id() %>" method="post">
+  <input name="_method" type="hidden" value="delete">
+
+  <button type="submit">Delete this client</button>
+</form>
+<br>
+<a href="/clients">Back to Manage Clients</a>

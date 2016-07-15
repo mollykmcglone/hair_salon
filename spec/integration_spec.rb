@@ -58,22 +58,22 @@ describe 'the client path', {:type => :feature} do
     expect(page).to have_content('Dolly Parton')
   end
 
-  # it "allows the user to update a client" do
-  #   client = Client.new({:id => nil, :name => 'Chris Damora',:station => '4'})
-  #   client.save()
-  #   visit '/clients'
-  #   click_link('Edit or Delete')
-  #   fill_in('Station', :with => '12')
-  #   click_button('Update')
-  #   expect(page).to have_content('Manage Your Clients')
-  # end
-  #
-  # it "allows the user to delete a client" do
-  #   client = Client.new({:id => nil, :name => 'Chris Damora',:station => '4'})
-  #   client.save()
-  #   visit '/clients'
-  #   click_link('Edit or Delete')
-  #   click_button('Delete this client')
-  #   expect(page).to have_no_content('Chris Damora')
-  # end
+  it "allows the user to update a client" do
+    client = Client.new({:id => nil, :name => 'Dolly Parton',:phone => '503-250-2173', :email => 'dollyparton@gmail.com', :stylist_id => nil})
+    client.save()
+    visit '/clients'
+    click_link('Edit or Delete')
+    fill_in('Name', :with => 'Loretta Lynn')
+    click_button('Update')
+    expect(page).to have_content('Manage Your Clients')
+  end
+
+  it "allows the user to delete a client" do
+    client = Client.new({:id => nil, :name => 'Dolly Parton',:phone => '503-250-2173', :email => 'dollyparton@gmail.com', :stylist_id => nil})
+    client.save()
+    visit '/clients'
+    click_link('Edit or Delete')
+    click_button('Delete this client')
+    expect(page).to have_no_content('Dolly Parton')
+  end
 end
