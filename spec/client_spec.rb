@@ -31,23 +31,31 @@ describe('#name') do
       end
     end
 
-    describe('#save') do
-      it 'saves a client' do
-        test_client = Client.new({:id => nil, :name => 'Patsy Cline',:phone => '503-250-2173', :email => 'patsycline@gmail.com', :stylist_id => nil})
-        test_client.save()
-        expect(Client.all()).to(eq([test_client]))
-      end
+  describe('#save') do
+    it 'saves a client' do
+      test_client = Client.new({:id => nil, :name => 'Patsy Cline',:phone => '503-250-2173', :email => 'patsycline@gmail.com', :stylist_id => nil})
+      test_client.save()
+      expect(Client.all()).to(eq([test_client]))
     end
+  end
 
-    describe('.find_by_name') do
-      it 'locates clients with a given name' do
-        test_client = Client.new({:id => nil, :name => 'Patsy Cline',:phone => '503-250-2173', :email => 'patsycline@gmail.com', :stylist_id => nil})
-        test_client2 = Client.new({:id => nil, :name => 'Dolly Parton',:phone => '971-554-4455', :email => 'dollyparton@gmail.com', :stylist_id => nil})
-        test_client.save()
-        test_client2.save()
-        expect(Client.find_by_name(test_client.name())).to(eq([test_client]))
-      end
+  describe('.find_by_name') do
+    it 'locates clients with a given name' do
+      test_client = Client.new({:id => nil, :name => 'Patsy Cline',:phone => '503-250-2173', :email => 'patsycline@gmail.com', :stylist_id => nil})
+      test_client2 = Client.new({:id => nil, :name => 'Dolly Parton',:phone => '971-554-4455', :email => 'dollyparton@gmail.com', :stylist_id => nil})
+      test_client.save()
+      test_client2.save()
+      expect(Client.find_by_name(test_client.name())).to(eq([test_client]))
     end
+  end
 
-
+  describe('#update') do
+    it 'lets the user update some of the attributes of the client' do
+      test_client = Client.new({:id => nil, :name => 'Patsy Cline',:phone => '503-250-2173', :email => 'patsycline@gmail.com', :stylist_id => 3})
+      test_client.save()
+      test_client.update({:email => 'patsycline@yahoo.com'})
+      expect(test_client.email()).to(eq('patsycline@yahoo.com'))
+      expect(test_client.name()).to(eq('Patsy Cline'))
+    end
+  end
 end

@@ -26,8 +26,8 @@ class Client
   end
 
   define_method(:==) do |other|
-      self.name.==(other.name).&(self.id.==(other.id))
-    end
+    self.name.==(other.name).&(self.id.==(other.id))
+  end
 
   define_method(:save) do
     result = DB.exec("INSERT INTO clients (name, phone, email) VALUES ('#{@name}', '#{@phone}', '#{@email}') RETURNING id;")
@@ -46,5 +46,17 @@ class Client
       clients.push(Client.new({:id => id, :name => name, :phone => phone, :email => email, :stylist_id => stylist_id}))
     end
     clients
+  end
+
+  define_method(:update) do |attributes|
+    @name = attributes.fetch(:name, @name)
+    @phone = attributes.fetch(:phone, @phone)
+    @email = attributes.fetch(:email, @email)
+    @stylist_id = attributes.fetch(:stylist_id, @stylist_id)
+    @id = self.id()
+    DB.exec("UPDATE clients SET name = '#{@name}' WHERE id = #{@id};")
+    DB.exec("UPDATE clients SET phone = '#{@phone}' WHERE id = #{@id};")
+    DB.exec("UPDATE clients SET email = '#{@email}' WHERE id = #{@id};")
+    DB.exec("UPDATE clients SET stylist_id = #{@stylist_id} WHERE id = #{@id};")
   end
 end
