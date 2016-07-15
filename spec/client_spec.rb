@@ -58,4 +58,15 @@ describe('#name') do
       expect(test_client.name()).to(eq('Patsy Cline'))
     end
   end
+
+  describe('#delete') do
+    it 'lets the user delete a client' do
+      test_client = Client.new({:id => nil, :name => 'Patsy Cline',:phone => '503-250-2173', :email => 'patsycline@gmail.com', :stylist_id => nil})
+      test_client2 = Client.new({:id => nil, :name => 'Dolly Parton',:phone => '971-554-4455', :email => 'dollyparton@gmail.com', :stylist_id => nil})
+      test_client.save()
+      test_client2.save()
+      test_client.delete()
+      expect(Client.all()).to(eq([test_client2]))
+    end
+  end
 end
