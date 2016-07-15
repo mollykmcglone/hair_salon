@@ -1,16 +1,18 @@
 <h1> Manage Your Stylists</h1>
 
 <% if @stylists.any?() %>
-  <ul>
-    <% @stylists.each do |stylist| %>
-      <li>
-        <%= stylist.name %>, <%= stylist.station %>
-        <button type =button><a href="/stylists/<%= @stylist.id() %>/edit">Edit or Delete</a></button>
-      </li>
-    <% end %>
-  </ul>
+<ul>
+  <% @stylists.each do |stylist| %>
+  <li>Name: <%= stylist.name() %>, Station:<%= stylist.station() %>
+    <form action="/stylists/<%= stylist.id() %>/edit" method="get">
+    <input id="id" name="id" type="hidden" value="<%=stylist.id() %>">
+    <button type="submit" name="edit" class="btn-sm">Edit or Delete</button>
+    </form>
+  </li><br>
+  <% end %>
+</ul>
 <% else %>
-  <h2> You don't have any stylists yet!</h2>
+<h2> You don't have any stylists yet!</h2>
 <% end %>
 
 <button type='button'><a href='/stylists/new'>Add a New Stylist</a></button>

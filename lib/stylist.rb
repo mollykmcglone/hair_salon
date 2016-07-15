@@ -43,23 +43,21 @@ class Stylist
   end
 
   define_singleton_method(:find_by_id) do |id|
-    returned_stylists = DB.exec("SELECT * FROM stylists WHERE id = #{id};")
-    stylists = []
-    returned_stylists.each do |stylist|
-      id = stylist['id'].to_i
-      name = stylist['name']
-      station = stylist['station']
-      stylists.push(Stylist.new({:id => id, :name => name, :station => station}))
+    found_stylist = nil
+    Stylist.all().each() do |stylist|
+      if stylist.id().==(id)
+        found_stylist = stylist
+      end
     end
-    stylists
+    found_stylist
   end
 
   define_method(:update) do |attributes|
-    @name = attributes.fetch(:name, @name)
-    @station = attributes.fetch(:station, @station)
+    @name = attributes.fetch(:name)
+    @station = attributes.fetch(:station)
     @id = self.id()
     DB.exec("UPDATE stylists SET name = '#{@name}' WHERE id = #{@id};")
-    DB.exec("UPDATE stylists SET station = '#{@station}' WHERE id = #{@id};")
+    DB.exec("UPDATE stylists SET station = #{@station} WHERE id = #{@id};")
   end
 
   define_method(:delete) do

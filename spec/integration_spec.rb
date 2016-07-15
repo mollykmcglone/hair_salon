@@ -20,4 +20,12 @@ describe 'the stylist path', {:type => :feature} do
     click_button('Add Stylist')
     expect(page).to have_content("Chris Zamora")
   end
+
+  it "allows the user to update a stylist" do
+    stylist = Stylist.new({:id => nil, :name => 'Chris Zamora', :station => '2'})
+    stylist.save()
+    visit '/stylists'
+    click_button('Edit or Delete')
+    expect(page).to have_content("Chris Zamora")
+  end
 end
