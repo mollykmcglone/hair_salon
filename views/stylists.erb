@@ -5,10 +5,7 @@
     <% @stylists.each do |stylist| %>
       <li>
         <%= stylist.name %>, <%= stylist.station %>
-        <form action="/stylists/edit" method="get">
-          <input id="stylist_id" name="stylist_id" type="hidden" value="<%=stylist.id() %>">
-          <button type="submit" name="assign_doctor" class="btn-sm">Edit or Delete</button>
-        </form>
+        <button type =button><a href="/stylists/<%= @stylist.id() %>/edit">Edit or Delete</a></button>
       </li>
     <% end %>
   </ul>

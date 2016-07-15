@@ -49,6 +49,16 @@ describe('#name') do
     end
   end
 
+  describe('.find_by_id') do
+    it 'locates stylists with a given id' do
+      test_stylist = Stylist.new({:id => nil, :name => 'Chris Damora',:station => '4'})
+      test_stylist2 = Stylist.new({:id => nil, :name => 'Maria Ramirez',:station => '5'})
+      test_stylist.save()
+      test_stylist2.save()
+      expect(Stylist.find_by_id(test_stylist.id())).to(eq([test_stylist]))
+    end
+  end
+
   describe('#update') do
     it 'lets the user update some of the attributes of the stylist' do
       test_stylist = Stylist.new({:id => nil, :name => 'Chris Damora',:station => '4'})
