@@ -1,0 +1,30 @@
+<!-- <% if @stylists.any?() %>
+  <form action="/clients/<%= @client.id %>" method="post">
+    <input type="hidden" name="_method" value="patch">
+
+    <% @movies.each() do |movie| %>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" name="movie_ids[]" value="<%= movie.id() %>"><%= movie.name() %>
+        </label>
+      </div>
+    <% end %>
+
+    <button type="submit">Add movies</button>
+  </form>
+<% end %> -->
+<!--
+<% if @stylists.any?() %>
+  <form action="/movies/<%= @movie.id %>" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <% @stylists.each() do |stylist| %>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" name="stylist_ids[]" value="<%= stylist.id() %>"><%= stylist.name() %>
+      </label>
+    </div>
+  <% end %>
+
+  <button type="submit">Add stylist</button>
+  </form>
+<% end %> -->

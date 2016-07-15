@@ -40,3 +40,40 @@ describe 'the stylist path', {:type => :feature} do
     expect(page).to have_no_content('Chris Damora')
   end
 end
+
+describe 'the client path', {:type => :feature} do
+  it "gets to the Manage Clients page" do
+    visit '/'
+    click_link 'Manage Clients'
+    expect(page).to have_content('Manage Your Clients')
+  end
+
+  it "allows the user to add a client" do
+    visit '/clients'
+    click_link 'Add a New Client'
+    fill_in('name', :with => 'Dolly Parton')
+    fill_in('phone', :with => '503-250-2173')
+    fill_in('email', :with => 'dollyparton@gmail.com')
+    click_button('Add Client')
+    expect(page).to have_content('Dolly Parton')
+  end
+
+  # it "allows the user to update a client" do
+  #   client = Client.new({:id => nil, :name => 'Chris Damora',:station => '4'})
+  #   client.save()
+  #   visit '/clients'
+  #   click_link('Edit or Delete')
+  #   fill_in('Station', :with => '12')
+  #   click_button('Update')
+  #   expect(page).to have_content('Manage Your Clients')
+  # end
+  #
+  # it "allows the user to delete a client" do
+  #   client = Client.new({:id => nil, :name => 'Chris Damora',:station => '4'})
+  #   client.save()
+  #   visit '/clients'
+  #   click_link('Edit or Delete')
+  #   click_button('Delete this client')
+  #   expect(page).to have_no_content('Chris Damora')
+  # end
+end

@@ -61,3 +61,53 @@ delete ('/stylists/:id') do
   @stylists = Stylist.all()
   erb(:stylists)
 end
+
+get('/clients') do
+  @clients = Client.all()
+  erb(:clients)
+end
+
+get('/clients/new') do
+  erb(:client_form)
+end
+
+post('/clients') do
+  name = params['name']
+  phone = params['phone']
+  email = params['email']
+  @client = Client.new({:id => nil, :name => name, :phone => phone, :email => email, :stylist => nil})
+  @client.save()
+  @clients = Client.all()
+  erb(:clients)
+end
+
+get('/clients/:id/edit') do
+  @client = Client.find_by_id(params.fetch('id').to_i())
+  erb(:client_edit)
+end
+
+patch('/clients/:id') do
+  @client = Client.find_by_id(params.fetch('id').to_i())
+  name = params.fetch('name')
+  if name.==('')
+    name = @client.name()
+  end
+  phone = params.fetch('phone')
+  if phone.==('')
+    phone = @client.phone()
+  end
+  email = params.fetch('email')
+  if email.==('')
+    email = @client.email()
+  end
+  @client.update({:name => name, :phone => phone, :email => email})
+  @clients = Client.all()
+  erb(:clients)
+end
+
+delete ('/clients/:id') do
+  @client = Client.find_by_id(params['id'].to_i())
+  @client.delete()
+  @clients = Client.all()
+  erb(:clients)
+end

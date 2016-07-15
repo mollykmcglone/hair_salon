@@ -1,1 +1,17 @@
 <h1> Manage Your Clients</h1>
+
+<% if @clients.any?() %>
+<ul>
+  <% @clients.each do |client| %>
+  <li>Name: <%= client.name() %>, Phone: <%= client.phone() %>, Email: <%= client.email() %>
+  <button type='button'><a href='/clients/<%= client.id() %>/edit'>Edit or Delete</a></button>
+  </li><br>
+  <% end %>
+</ul>
+<% else %>
+<h2> You don't have any clients yet!</h2>
+<% end %>
+
+<button type='button'><a href='/clients/new'>Add a New Client</a></button>
+
+<button type='button'><a href='/'>Back Home</a></button>

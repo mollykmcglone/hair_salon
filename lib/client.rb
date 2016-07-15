@@ -19,7 +19,7 @@ class Client
       name = client["name"]
       phone = client["phone"]
       email = client["email"]
-      stylist_id = client["stylist_id"].to_i()
+      stylist_id = client["stylist_id"]
       clients.push(Client.new({:id => id, :name => name, :phone => phone, :email => email, :stylist_id => stylist_id}))
     end
     clients
@@ -46,6 +46,16 @@ class Client
       clients.push(Client.new({:id => id, :name => name, :phone => phone, :email => email, :stylist_id => stylist_id}))
     end
     clients
+  end
+
+  define_singleton_method(:find_by_id) do |id|
+    found_client = nil
+    Client.all().each() do |client|
+      if client.id().==(id)
+        found_client = client
+      end
+    end
+    found_client
   end
 
   define_method(:update) do |attributes|
