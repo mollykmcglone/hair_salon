@@ -53,8 +53,8 @@ class Stylist
   end
 
   define_method(:update) do |attributes|
-    @name = attributes.fetch(:name)
-    @station = attributes.fetch(:station)
+    @name = attributes.fetch(:name, @name)
+    @station = attributes.fetch(:station, @station)
     @id = self.id()
     DB.exec("UPDATE stylists SET name = '#{@name}' WHERE id = #{@id};")
     DB.exec("UPDATE stylists SET station = #{@station} WHERE id = #{@id};")

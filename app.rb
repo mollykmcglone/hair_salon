@@ -23,7 +23,7 @@ end
 
 post('/stylists') do
   name = params['name']
-  station = params['station'].to_i()
+  station = params['station']
   @stylist = Stylist.new({:id => nil, :name => name, :station => station})
   @stylist.save()
   @stylists = Stylist.all()
@@ -41,11 +41,16 @@ get('/stylists/:id/edit') do
 end
 
 patch('/stylists/:id') do
-  @name = params.fetch('name')
-  @station = params.fetch('station').to_i()
   @stylist = Stylist.find_by_id(params.fetch('id').to_i())
-  binding.pry
-  @stylist.update({:name => 'name', :station => 'station'})
+  name = params.fetch('name')
+  if name.==('')
+    name = @stylist.name()
+  end
+  station = params.fetch('station')
+  if station.==('')
+    station = @stylist.station()
+  end
+  @stylist.update({:name => name, :station => station})
   @stylists = Stylist.all()
   erb(:stylists)
 end

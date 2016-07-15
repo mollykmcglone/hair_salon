@@ -4,10 +4,7 @@
 <ul>
   <% @stylists.each do |stylist| %>
   <li>Name: <%= stylist.name() %>, Station:<%= stylist.station() %>
-    <form action="/stylists/<%= stylist.id() %>/edit" method="get">
-    <input id="id" name="id" type="hidden" value="<%=stylist.id() %>">
-    <button type="submit" name="edit" class="btn-sm">Edit or Delete</button>
-    </form>
+  <button type='button'><a href='/stylists/<%= stylist.id() %>/edit'>Edit or Delete</a></button>
   </li><br>
   <% end %>
 </ul>
