@@ -27,7 +27,7 @@ describe('#name') do
       it 'compares two clients by name and id to see if they are the same' do
         test_client = Client.new({:id => nil, :name => 'Patsy Cline',:phone => '503-250-2173', :email => 'patsycline@gmail.com', :stylist_id => nil})
         test_client2 = Client.new({:id => nil, :name => 'Patsy Cline',:phone => '503-250-2173', :email => 'patsycline@gmail.com', :stylist_id => nil})
-        test_client1.eql?(test_client2)
+        test_client.eql?(test_client2)
       end
     end
 
@@ -42,8 +42,8 @@ describe('#name') do
     describe('.find_by_name') do
       it 'locates clients with a given name' do
         test_client = Client.new({:id => nil, :name => 'Patsy Cline',:phone => '503-250-2173', :email => 'patsycline@gmail.com', :stylist_id => nil})
-        test_client2 = Client.new({:id => nil, :name => 'Patsy Cline',:phone => '503-250-2173', :email => 'patsycline@gmail.com', :stylist_id => nil})
-        test_client1.save()
+        test_client2 = Client.new({:id => nil, :name => 'Dolly Parton',:phone => '971-554-4455', :email => 'dollyparton@gmail.com', :stylist_id => nil})
+        test_client.save()
         test_client2.save()
         expect(Client.find_by_name(test_client.name())).to(eq([test_client]))
       end

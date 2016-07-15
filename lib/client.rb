@@ -15,11 +15,11 @@ class Client
     returned_clients = DB.exec("SELECT * FROM clients;")
     clients = []
     returned_clients.each() do |client|
-      id = client.fetch("id").to_i()
-      name = client.fetch("name")
-      phone = client.fetch("phone")
-      email = client.fetch("email")
-      stylist_id = client.fetch("stylist_id").to_i()
+      id = client["id"].to_i()
+      name = client["name"]
+      phone = client["phone"]
+      email = client["email"]
+      stylist_id = client["stylist_id"].to_i()
       clients.push(Client.new({:id => id, :name => name, :phone => phone, :email => email, :stylist_id => stylist_id}))
     end
     clients
@@ -43,7 +43,7 @@ class Client
       phone = client['phone']
       email = client['email']
       stylist_id = client['stylist_id'].to_i
-      clients.push(Book.new({:id => id, :name => name, :phone => author, :email => email, :stylist_id => stylist_id}))
+      clients.push(Client.new({:id => id, :name => name, :phone => phone, :email => email, :stylist_id => stylist_id}))
     end
     clients
   end
