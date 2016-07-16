@@ -28,11 +28,13 @@ This app allows users to view, add, update and delete stylists and clients at a 
 
 * To replicate, clone this repository to your local hard drive using this link: https://github.com/mollykmcglone/hair_salon.git
 
-###Set up Database:
+###Set up Databases in PSQL:
+```
 CREATE DATABASE hair_salon;
-CREATE TABLE 
-CREATE TABLE
-
+CREATE TABLE stylists (id serial PRIMARY KEY, name varchar, station int);
+CREATE TABLE clients (id serial PRIMARY KEY, name varchar, phone varchar, email varchar, stylist_id int);
+CREATE DATABASE hair_salon_test WITH TEMPLATE hair_salon;
+```
 ###Install Bundler:
 ```
 $ gem install bundler
