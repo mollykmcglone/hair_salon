@@ -63,4 +63,9 @@ class Stylist
   define_method(:delete) do
     DB.exec("DELETE FROM stylists WHERE id = #{self.id};")
   end
+
+  define_method(:assign) do |stylist_id|
+   result = DB.exec("UPDATE clients SET stylist_id = #{stylist_id} WHERE client_id = #{@client_id} RETURNING stylist_id;")
+   @stylist_id = result.first['stylist_id'].to_i
+ end
 end

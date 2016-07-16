@@ -1,4 +1,4 @@
-<h1>Update <%=@client.name() %> </h1>
+<h1>Update <%=@client.name() %>'s Information </h1>
 
 <form action="/clients/<%= @client.id() %>" method="post">
   <input name="_method" type="hidden" value="patch">
@@ -14,10 +14,24 @@
     <label for="email">Email:</label>
     <input type = "text" name="email" id="email">
   <div>
-
   <br><button type="submit">Update</button><br>
 </form>
 <br>
+
+<% if @stylists.any?() %>
+<form action="/client/assign" method="post">
+<input id="id" name="id" type="hidden" value="<%=client.id() %>">
+   <select class="stylists" name="stylists">
+     <% @stylists.each do |stylist| %>
+       <option value="<%= stylist.id %>"><%= stylist.name %></option>
+     <% end %>
+   </select>
+   <button type="submit" name="assign_stylist" class="btn-sm">Assign Stylist</button>
+</form>
+<% else %>
+<p> There are no stylists to assign to this client!</p>
+<% end %>
+
 
 <form action="/clients/<%= @client.id() %>" method="post">
   <input name="_method" type="hidden" value="delete">

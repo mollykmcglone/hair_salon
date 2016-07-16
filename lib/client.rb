@@ -62,12 +62,10 @@ class Client
     @name = attributes.fetch(:name, @name)
     @phone = attributes.fetch(:phone, @phone)
     @email = attributes.fetch(:email, @email)
-    @stylist_id = attributes.fetch(:stylist_id, @stylist_id)
     @id = self.id()
     DB.exec("UPDATE clients SET name = '#{@name}' WHERE id = #{@id};")
     DB.exec("UPDATE clients SET phone = '#{@phone}' WHERE id = #{@id};")
     DB.exec("UPDATE clients SET email = '#{@email}' WHERE id = #{@id};")
-    DB.exec("UPDATE clients SET stylist_id = #{@stylist_id} WHERE id = #{@id};")
   end
 
   define_method(:delete) do

@@ -1,4 +1,4 @@
-<h1>Update <%=@stylist.name() %> </h1>
+<h1> Edit <%= @stylist.name() %>'s Info: </h1>
 
 <form action="/stylists/<%= @stylist.id() %>" method="post">
   <input name="_method" type="hidden" value="patch">
@@ -14,7 +14,6 @@
 
 </form>
 <br>
-
 <form action="/stylists/<%= @stylist.id() %>" method="post">
   <input name="_method" type="hidden" value="delete">
 
