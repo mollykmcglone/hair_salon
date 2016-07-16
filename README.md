@@ -35,18 +35,14 @@ CREATE TABLE stylists (id serial PRIMARY KEY, name varchar, station int);
 CREATE TABLE clients (id serial PRIMARY KEY, name varchar, phone varchar, email varchar, stylist_id int);
 CREATE DATABASE hair_salon_test WITH TEMPLATE hair_salon;
 ```
-###Install Bundler:
+###Install and Run Bundler:
 ```
 $ gem install bundler
-```
-###Run Bundler:
-```
 $ bundle
 ```
 ###Run the Sinatra application:
 ```
 $ ruby app.rb
-
 Navigate to `localhost:4567` with a browser
 ```
 ## Support and contact details
