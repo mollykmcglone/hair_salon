@@ -4,18 +4,18 @@ class Stylist
   attr_reader(:id, :name, :station)
 
   define_method(:initialize) do |attributes|
-    @id = attributes[:id]
-    @name = attributes[:name]
-    @station = attributes[:station]
+    @id = attributes.fetch(:id)
+    @name = attributes.fetch(:name)
+    @station = attributes.fetch(:station)
   end
 
   define_singleton_method(:all) do
     returned_stylists = DB.exec("SELECT * FROM stylists;")
     stylists = []
     returned_stylists.each() do |stylist|
-      id = stylist["id"].to_i()
-      name = stylist["name"]
-      station = stylist["station"]
+      id = stylist.fetch("id").to_i()
+      name = stylist.fetch("name")
+      station = stylist.fetch("station")
       stylists.push(Stylist.new({:id => id, :name => name, :station => station}))
     end
     stylists

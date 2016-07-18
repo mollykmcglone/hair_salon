@@ -9,6 +9,8 @@ require('pry')
 DB = PG.connect({:dbname => "hair_salon"})
 
 get('/') do
+  @stylists = Stylist.all()
+  @clients = Client.all()
   erb(:index)
 end
 
@@ -63,6 +65,7 @@ delete ('/stylists/:id') do
 end
 
 get('/clients') do
+  @stylists = Stylist.all()
   @clients = Client.all()
   erb(:clients)
 end
@@ -75,9 +78,10 @@ post('/clients') do
   name = params['name']
   phone = params['phone']
   email = params['email']
-  @client = Client.new({:id => nil, :name => name, :phone => phone, :email => email, :stylist => nil})
+  @client = Client.new({:id => nil, :name => name, :phone => phone, :email => email})
   @client.save()
   @clients = Client.all()
+  @stylists = Stylist.all()
   erb(:clients)
 end
 
@@ -104,12 +108,13 @@ patch('/clients/:id') do
   end
   @client.update({:name => name, :phone => phone, :email => email})
   @clients = Client.all()
+  @stylists = Stylist.all()
   erb(:clients)
 end
 
-post('/clients/assign') do
-  @client = Client.find_by_id(params.fetch('id').to_i())
-  @client.assign(params['stylists'])
+patch ('/clients/:id/assign') do
+  @client = Client.find_by_id(params['id'].to_i())
+  @client.assign(params['stylists'].to_i())
   @clients = Client.all()
   @stylists = Stylist.all()
   erb(:clients)
@@ -119,5 +124,6 @@ delete ('/clients/:id') do
   @client = Client.find_by_id(params['id'].to_i())
   @client.delete()
   @clients = Client.all()
+  @stylists = Stylist.all()
   erb(:clients)
 end

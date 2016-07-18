@@ -5,10 +5,10 @@ class Client
 
   define_method(:initialize) do |attributes|
     @id = attributes[:id]
-    @name = attributes[:name]
-    @phone = attributes[:phone]
-    @email = attributes[:email]
-    @stylist_id = attributes[:stylist_id]
+    @name = attributes.fetch(:name)
+    @phone = attributes.fetch(:phone)
+    @email = attributes.fetch(:email)
+    @stylist_id = attributes[stylist_id]
   end
 
   define_singleton_method(:all) do
@@ -19,7 +19,7 @@ class Client
       name = client["name"]
       phone = client["phone"]
       email = client["email"]
-      stylist_id = client["stylist_id"]
+      stylist_id = client["stylist_id"].to_i()
       clients.push(Client.new({:id => id, :name => name, :phone => phone, :email => email, :stylist_id => stylist_id}))
     end
     clients

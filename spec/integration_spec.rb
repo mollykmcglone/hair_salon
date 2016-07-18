@@ -72,6 +72,7 @@ describe 'the client path', {:type => :feature} do
     stylist = Stylist.new({:id => nil, :name => 'Chris Damora',:station => '4'})
     client = Client.new({:id => nil, :name => 'Dolly Parton',:phone => '503-250-2173', :email => 'dollyparton@gmail.com', :stylist_id => nil})
     client.save()
+    stylist.save()
     visit '/clients'
     click_link('Edit or Delete')
     select 'Chris Damora', :from => 'stylists'
