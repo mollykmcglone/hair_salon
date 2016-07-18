@@ -82,6 +82,8 @@ post('/clients') do
 end
 
 get('/clients/:id/edit') do
+  @stylists = Stylist.all()
+  @clients = Client.all()
   @client = Client.find_by_id(params.fetch('id').to_i())
   erb(:client_edit)
 end
@@ -102,6 +104,14 @@ patch('/clients/:id') do
   end
   @client.update({:name => name, :phone => phone, :email => email})
   @clients = Client.all()
+  erb(:clients)
+end
+
+post('/clients/assign') do
+  @client = Client.find_by_id(params.fetch('id').to_i())
+  @client.assign(params['stylists'])
+  @clients = Client.all()
+  @stylists = Stylist.all()
   erb(:clients)
 end
 

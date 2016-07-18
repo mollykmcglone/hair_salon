@@ -18,9 +18,10 @@
 </form>
 <br>
 
+<h1>Assign <%=@client.name() %> to a Stylist </h1>
 <% if @stylists.any?() %>
-<form action="/client/assign" method="post">
-<input id="id" name="id" type="hidden" value="<%=client.id() %>">
+<form action="/clients/assign" method="post">
+<input id = "id" name="id" type="hidden" value="<%= @client.id()%>">
    <select class="stylists" name="stylists">
      <% @stylists.each do |stylist| %>
        <option value="<%= stylist.id %>"><%= stylist.name %></option>
@@ -32,7 +33,7 @@
 <p> There are no stylists to assign to this client!</p>
 <% end %>
 
-
+<h1>Delete <%=@client.name() %></h1>
 <form action="/clients/<%= @client.id() %>" method="post">
   <input name="_method" type="hidden" value="delete">
 

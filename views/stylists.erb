@@ -4,7 +4,7 @@
 <ul>
   <% @stylists.each do |stylist| %>
   <li>Name: <%= stylist.name() %>, Station:<%= stylist.station() %>
-  <button type='button'><a href='/stylists/<%= stylist.id() %>/edit'>View Details</a></button>
+  <button type='button'><a href='/stylists/<%= stylist.id() %>/edit'>Edit or Delete</a></button>
   </li><br>
   <% end %>
 </ul>

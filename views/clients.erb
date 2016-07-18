@@ -3,7 +3,7 @@
 <% if @clients.any?() %>
 <ul>
   <% @clients.each do |client| %>
-  <li>Name: <%= client.name() %>, Phone: <%= client.phone() %>, Email: <%= client.email() %>, Stylist: <% if client.stylist_id %> : <%= Stylist.find_by_id(client.stylist_id).name %> <% else %> Not assigned yet <% end %>
+  <li>Name: <%= client.name() %>, Phone: <%= client.phone() %>, Email: <%= client.email() %>, Stylist: <% if client.stylist_id %> <%= Stylist.find_by_id(client.stylist_id).name %> <% else %> Not assigned yet <% end %>
   <button type='button'><a href='/clients/<%= client.id() %>/edit'>Edit or Delete</a></button>
   </li><br>
   <% end %>

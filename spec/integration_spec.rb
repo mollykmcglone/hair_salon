@@ -58,15 +58,27 @@ describe 'the client path', {:type => :feature} do
     expect(page).to have_content('Dolly Parton')
   end
 
-  it "allows the user to update a client" do
+  it "allows the user to update a client's info" do
     client = Client.new({:id => nil, :name => 'Dolly Parton',:phone => '503-250-2173', :email => 'dollyparton@gmail.com', :stylist_id => nil})
     client.save()
     visit '/clients'
     click_link('Edit or Delete')
-    fill_in('Name', :with => 'Loretta Lynn')
+    fill_in("name", :with => 'Loretta Lynn')
     click_button('Update')
     expect(page).to have_content('Manage Your Clients')
   end
+
+  it "allows the user to assign a client to a stylist" do
+    stylist = Stylist.new({:id => nil, :name => 'Chris Damora',:station => '4'})
+    client = Client.new({:id => nil, :name => 'Dolly Parton',:phone => '503-250-2173', :email => 'dollyparton@gmail.com', :stylist_id => nil})
+    client.save()
+    visit '/clients'
+    click_link('Edit or Delete')
+    select 'Chris Damora', :from => 'stylists'
+    click_button 'Assign Stylist'
+    expect(page).to have_content('Chris Damora')
+  end
+
 
   it "allows the user to delete a client" do
     client = Client.new({:id => nil, :name => 'Dolly Parton',:phone => '503-250-2173', :email => 'dollyparton@gmail.com', :stylist_id => nil})
