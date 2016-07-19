@@ -1,5 +1,18 @@
-<h1>Name: <%= @stylist.name() %></h1>
+<h1> Stylist Information </h1>
 
-<h1>Station: <%= @stylist.station() %></h1>
+<h3>Name: <%= @stylist.name() %></h3>
 
-<a href="/stylists">Back to Manage Stylists</a>
+<h3>Station: <%= @stylist.station() %></h3>
+
+
+<h3>Clients:</h3>
+  <ul>
+    <% @clients.each do |client| %>
+      <li><%= client.name %></li>
+    <% end %>
+  </ul>
+
+
+<button type='button'><a href='/stylists/<%= @stylist.id() %>/edit'>Edit or Delete</a></button>
+
+<button type='button'><a href="/stylists">Back to Manage Stylists</a></button>

@@ -13,6 +13,13 @@
     <label for="email">Email:</label>
     <input type="text" name="email">
   </div>
+  
+  <label for="stylist_id">Choose a Stylist:</label>
+  <select id="stylist_id" name="stylist_id" type="text">
+    <% @stylists.each() do |stylist| %>
+    <option value="<%= stylist.id() %>"><%= stylist.name %></option>
+    <% end %>
+  </select>
 
   <button type="submit">Add Client</button>
 </form>

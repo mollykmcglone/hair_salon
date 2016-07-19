@@ -1,0 +1,18 @@
+<h1> Client Information <h1>
+
+<h3> Name: <%= @client.name() %> </h3>
+
+<h3> Phone: <%= @client.phone() %></h3>
+
+<h3> Email: <%= @client.email() %> </h3>
+
+<% if @client.stylist_id() %>
+<h3> Stylist:
+    <%= Stylist.find_by_id(@client.stylist_id).name() %> </h3>
+<% else %>
+</h3> No Stylist Assigned Yet </h3>
+<% end %>
+
+<button type='button'><a href='/clients/<%= @client.id() %>/edit'>Edit or Delete Client</a></button>
+
+<button type='button'><a href="/clients">Back to Manage Clients</a></button>

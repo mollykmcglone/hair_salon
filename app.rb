@@ -34,6 +34,8 @@ end
 
 get('/stylists/:id') do
   @stylist = Stylist.find_by_id(params.fetch('id').to_i())
+  stylist_id = @stylist.id()
+  @clients = Client.find_by_stylist_id(stylist_id)
   erb(:stylist)
 end
 
@@ -71,18 +73,28 @@ get('/clients') do
 end
 
 get('/clients/new') do
+  @stylists = Stylist.all()
   erb(:client_form)
 end
 
 post('/clients') do
-  name = params['name']
-  phone = params['phone']
-  email = params['email']
+  name = params.fetch('name')
+  phone = params.fetch('phone')
+  email = params.fetch('email')
+  stylist_id = params.fetch('stylist_id').to_i()
   @client = Client.new({:id => nil, :name => name, :phone => phone, :email => email})
   @client.save()
+  @client.assign(stylist_id)
   @clients = Client.all()
   @stylists = Stylist.all()
   erb(:clients)
+end
+
+get('/clients/:id') do
+  @client = Client.find_by_id(params.fetch('id').to_i())
+  @clients = Client.all()
+  @stylists = Stylist.all()
+  erb(:client)
 end
 
 get('/clients/:id/edit') do
@@ -106,15 +118,27 @@ patch('/clients/:id') do
   if email.==('')
     email = @client.email()
   end
-  @client.update({:name => name, :phone => phone, :email => email})
+  stylist_id = params.fetch('stylist_id').to_i()
+  if stylist_id.==('')
+    stylist_id = @client.stylist_id()
+  end
+  @client.update({:name => name, :phone => phone, :email => email, :stylist_id => stylist_id})
   @clients = Client.all()
   @stylists = Stylist.all()
   erb(:clients)
 end
 
-patch ('/clients/:id/assign') do
+get('/clients/:id/assign') do
+  @stylists = Stylist.all()
+  @clients = Client.all()
+  @client = Client.find_by_id(params.fetch('id').to_i())
+  erb(:client_assign)
+end
+
+post ('/clients/:id/assign') do
   @client = Client.find_by_id(params['id'].to_i())
-  @client.assign(params['stylists'].to_i())
+  stylist_id = params.fetch('stylist_id').to_i()
+  @client.assign(stylist_id)
   @clients = Client.all()
   @stylists = Stylist.all()
   erb(:clients)

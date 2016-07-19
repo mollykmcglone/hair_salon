@@ -1,10 +1,10 @@
 <h1> Manage Your Stylists</h1>
-
+<br>
 <% if @stylists.any?() %>
 <ul>
   <% @stylists.each do |stylist| %>
-  <li>Name: <%= stylist.name() %>, Station:<%= stylist.station() %>
-  <button type='button'><a href='/stylists/<%= stylist.id() %>/edit'>Edit or Delete</a></button>
+  <li><%= stylist.name() %>
+    <button type='button'><a href='/stylists/<%= stylist.id() %>'>View Details</a></button>
   </li><br>
   <% end %>
 </ul>
