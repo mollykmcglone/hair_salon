@@ -6,7 +6,7 @@
 
 ## Description
 
-This app allows users to view, add, update and delete stylists and clients at a hair salon.  
+This app allows users to view, add, update and delete stylists and clients at a hair salon. Users may also assign clients to a stylist and view a list of clients for each stylist.  
 
 ## Technologies Used
 
@@ -31,6 +31,7 @@ This app allows users to view, add, update and delete stylists and clients at a 
 ###Set up Databases in PSQL:
 ```
 CREATE DATABASE hair_salon;
+\c hair_salon;
 CREATE TABLE stylists (id serial PRIMARY KEY, name varchar, station int);
 CREATE TABLE clients (id serial PRIMARY KEY, name varchar, phone varchar, email varchar, stylist_id int);
 CREATE DATABASE hair_salon_test WITH TEMPLATE hair_salon;
