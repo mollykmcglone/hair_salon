@@ -6,9 +6,8 @@
 
 <h3> Email: <%= @client.email() %> </h3>
 
-<h3> Stylist:</h3>
 <% if @client.stylist_id() != 0 %>
-  <%= Stylist.find_by_id(@client.stylist_id).name() %> </h3>
+<h3>Stylist: <%= Stylist.find_by_id(@client.stylist_id).name() %> </h3>
 <% else %>
 </h3> No Stylist Assigned Yet </h3>
 <% end %>
