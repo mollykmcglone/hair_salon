@@ -3,7 +3,7 @@ require('capybara/rspec')
 require('./app')
 require('launchy')
 Capybara.app = Sinatra::Application
-set(:show_exceptions, false)
+# set(:show_exceptions, false)
 
 describe 'the stylist path', {:type => :feature} do
   it "gets to the Manage Stylists page" do
@@ -27,7 +27,7 @@ describe 'the stylist path', {:type => :feature} do
     fill_in('name', :with => 'Chris Zamora')
     fill_in('station', :with => '2')
     click_button('Add Stylist')
-    click_link('View Details')
+    click_link('Chris Zamora')
     expect(page).to have_content("Stylist Information")
   end
 
@@ -35,7 +35,7 @@ describe 'the stylist path', {:type => :feature} do
     stylist = Stylist.new({:id => nil, :name => 'Chris Damora',:station => '4'})
     stylist.save()
     visit '/stylists'
-    click_link('View Details')
+    click_link('Chris Damora')
     click_link('Edit or Delete')
     fill_in('Station', :with => '12')
     click_button('Update')
@@ -46,7 +46,7 @@ describe 'the stylist path', {:type => :feature} do
     stylist = Stylist.new({:id => nil, :name => 'Chris Damora',:station => '4'})
     stylist.save()
     visit '/stylists'
-    click_link('View Details')
+    click_link('Chris Damora')
     click_link('Edit or Delete')
     click_button('Delete this stylist')
     expect(page).to have_no_content('Chris Damora')
@@ -76,11 +76,11 @@ describe 'the client path', {:type => :feature} do
   it "allows the user to update a client's info" do
     stylist = Stylist.new({:id => nil, :name => 'Chris Damora',:station => '4'})
     stylist.save()
-    client = Client.new({:id => nil, :name => 'Dolly Parton',:phone => '503-250-2173', :email => 'dollyparton@gmail.com', :stylist_id => stylist.id()})
+    client = Client.new({:id => nil, :name => 'Dolly Parton',:phone => '503-250-2173', :email => 'dollyparton@gmail.com', :stylist_id => stylist.id})
     client.save()
     visit '/clients'
-    click_link('View Details')
-    click_link('Edit or Delete Client')
+    click_link('Dolly Parton')
+    click_link('edit_delete')
     fill_in("name", :with => 'Loretta Lynn')
     click_button('Update')
     expect(page).to have_content('Loretta Lynn')
@@ -92,18 +92,19 @@ describe 'the client path', {:type => :feature} do
     client.save()
     stylist.save()
     visit '/clients'
-    click_link('Edit or Delete Client')
-    select 'Chris Damora', :from => 'stylists'
+    click_link('Dolly Parton')
+    click_link('edit_delete')
+    select('Chris Damora', :from => 'stylist_id')
     click_button 'Update'
-    expect(page).to have_content('Chris Damora')
+    expect(page).to have_content('Dolly Parton')
   end
 
   it "allows the user to delete a client" do
     client = Client.new({:id => nil, :name => 'Dolly Parton',:phone => '503-250-2173', :email => 'dollyparton@gmail.com', :stylist_id => nil})
     client.save()
     visit '/clients'
-    click_link('Edit or Delete')
-    click_button('Delete this client')
+    click_link('Dolly Parton')
+    click_button('Delete Client')
     expect(page).to have_no_content('Dolly Parton')
   end
 end

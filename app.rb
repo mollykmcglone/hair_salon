@@ -81,7 +81,7 @@ post('/clients') do
   name = params.fetch('name')
   phone = params.fetch('phone')
   email = params.fetch('email')
-  stylist_id = params.fetch('stylist_id').to_i()
+  stylist_id = params['stylist_id'].to_i()
   @client = Client.new({:id => nil, :name => name, :phone => phone, :email => email})
   @client.save()
   @client.assign(stylist_id)
@@ -104,7 +104,7 @@ get('/clients/:id/edit') do
   erb(:client_edit)
 end
 
-patch('/clients/:id') do
+patch('/clients/:id/update') do
   @client = Client.find_by_id(params.fetch('id').to_i())
   name = params.fetch('name')
   if name.==('')
@@ -118,7 +118,7 @@ patch('/clients/:id') do
   if email.==('')
     email = @client.email()
   end
-  stylist_id = params.fetch('stylist_id').to_i()
+  stylist_id = params['stylist_id'].to_i()
   if stylist_id.==('')
     stylist_id = @client.stylist_id()
   end
@@ -144,7 +144,7 @@ post ('/clients/:id/assign') do
   erb(:clients)
 end
 
-delete ('/clients/:id') do
+delete ('/clients/:id/delete') do
   @client = Client.find_by_id(params['id'].to_i())
   @client.delete()
   @clients = Client.all()

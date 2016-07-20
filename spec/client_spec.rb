@@ -67,8 +67,10 @@ describe('#name') do
       test_stylist2.save()
       test_client = Client.new({:id => nil, :name => 'Patsy Cline',:phone => '503-250-2173', :email => 'patsycline@gmail.com', :stylist_id => test_stylist.id()})
       test_client.save()
+      test_client.assign(test_stylist.id)
       test_client2 = Client.new({:id => nil, :name => 'Dolly Parton',:phone => '971-554-4455', :email => 'dollyparton@gmail.com', :stylist_id => test_stylist2.id()})
       test_client2.save()
+      test_client2.assign(test_stylist2.id)
       expect(Client.find_by_stylist_id(test_stylist.id())).to(eq([test_client]))
     end
   end

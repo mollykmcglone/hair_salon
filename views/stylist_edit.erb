@@ -10,14 +10,14 @@
     <label for="station">Station:</label>
     <input type="text" name="station" id="station">
   </div>
-  <br><button type="submit">Update</button><br>
+  <br><button type="submit" class="btn btn-large">Update</button><br>
 
 </form>
 <br>
 <form action="/stylists/<%= @stylist.id() %>" method="post">
   <input name="_method" type="hidden" value="delete">
 
-  <button type="submit">Delete this stylist</button>
+  <button type="submit" class="btn btn-large">Delete this stylist</button>
 </form>
 <br>
-<a href="/stylists">Back to Manage Stylists</a>
+<button type= "button" class="btn btn-large"><a href="/stylists">Back to Manage Stylists</a></button>

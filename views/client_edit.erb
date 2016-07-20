@@ -1,6 +1,6 @@
 <h1>Update <%= @client.name() %>'s Information </h1>
 
-<form action="/clients/<%= @client.id() %>" method="post">
+<form action="/clients/<%= @client.id() %>/update" method="post">
   <input name="_method" type="hidden" value="patch">
   <div class="form-group">
     <label for="name">Name:</label>
@@ -21,16 +21,10 @@
       <option value="<%= stylist.id() %>"><%= stylist.name %></option>
       <% end %>
     </select>
-    
-  <br><button type="submit">Update</button><br>
+
+  <br><button type="submit" class="btn btn-large">Update</button><br>
 </form>
 <br>
 
-<h1>Delete <%= @client.name() %></h1>
-<form action="/clients/<%= @client.id() %>" method="post">
-  <input name="_method" type="hidden" value="delete">
-  <button type="submit">Delete Client</button>
-</form>
-
 <br>
-<a href="/clients">Back to Manage Clients</a>
+<button type="button" class="btn btn-large"><a href="/clients">Back to Manage Clients</a></button>
